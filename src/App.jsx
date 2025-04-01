@@ -79,8 +79,42 @@ function App({ defaultCategory = "number" }) {
     "The moon has moonquakes.",
     "Sloths can hold their breath longer than dolphins."
   ];
-  
 
+  /* Dinner */
+  const dinners = [
+    "Spaghetti Bolognese", "Chicken Stir Fry", "Tacos", "Sushi", "Burgers", "Grilled Salmon",
+    "Pizza", "Lentil Soup", "Steak and Potatoes", "Curry", "Roast Chicken", "Chili"
+  ];
+  
+  /* Destination */
+  const destinations = [
+    "Paris", "New York", "Tokyo", "Sydney", "Cape Town", "Rome", "Dubai", "Bangkok", "Toronto", "Rio de Janeiro"
+  ];
+  
+  /* US State */
+  const usStates = [
+    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+    "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
+    "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana",
+    "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina",
+    "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina",
+    "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia",
+    "Wisconsin", "Wyoming"
+  ];
+  
+  /* US President */
+  const presidents = [
+    "George Washington", "John Adams", "Thomas Jefferson", "James Madison", "James Monroe",
+    "John Quincy Adams", "Andrew Jackson", "Martin Van Buren", "William Henry Harrison",
+    "John Tyler", "James K. Polk", "Zachary Taylor", "Millard Fillmore", "Franklin Pierce",
+    "James Buchanan", "Abraham Lincoln", "Andrew Johnson", "Ulysses S. Grant", "Rutherford B. Hayes",
+    "James A. Garfield", "Chester A. Arthur", "Grover Cleveland", "Benjamin Harrison",
+    "William McKinley", "Theodore Roosevelt", "William H. Taft", "Woodrow Wilson", "Warren G. Harding",
+    "Calvin Coolidge", "Herbert Hoover", "Franklin D. Roosevelt", "Harry S. Truman", "Dwight D. Eisenhower",
+    "John F. Kennedy", "Lyndon B. Johnson", "Richard Nixon", "Gerald Ford", "Jimmy Carter", "Ronald Reagan",
+    "George H. W. Bush", "Bill Clinton", "George W. Bush", "Barack Obama", "Donald Trump", "Joe Biden"
+  ];
+    
 
   const handleGenerate = () => {
     if (category === "number") {
@@ -135,7 +169,7 @@ function App({ defaultCategory = "number" }) {
         setResult("No words match the selected length.");
       } else {
         const randWord = filteredWords[Math.floor(Math.random() * filteredWords.length)];
-        setResult(`🧠 Word: ${randWord}`);
+        setResult(`💬 Word: ${randWord}`);
         setResultValue(`${randWord}`);
       }
     }
@@ -165,6 +199,31 @@ function App({ defaultCategory = "number" }) {
       setResultValue(`${randomFact}`);
     }
 
+    else if (category === "dinner") {
+      const randomDinner = dinners[Math.floor(Math.random() * dinners.length)];
+      setResult(`🍽 Dinner: ${randomDinner}`);
+      setResultValue(randomDinner);
+    }
+    
+    else if (category === "destination") {
+      const randomPlace = destinations[Math.floor(Math.random() * destinations.length)];
+      setResult(`✈️ Destination: ${randomPlace}`);
+      setResultValue(randomPlace);
+    }
+    
+    else if (category === "state") {
+      const randomState = usStates[Math.floor(Math.random() * usStates.length)];
+      setResult(`🌎 US State: ${randomState}`);
+      setResultValue(randomState);
+    }
+    
+    else if (category === "president") {
+      const randomPresident = presidents[Math.floor(Math.random() * presidents.length)];
+      setResult(`🦅 US President: ${randomPresident}`);
+      setResultValue(randomPresident);
+    }
+
+
     else {
       setResult(`Generated: ${category}`);
     }
@@ -174,13 +233,16 @@ function App({ defaultCategory = "number" }) {
   return (
     <div className="min-h-screen bg-white p-6 flex flex-col items-center">
       <Helmet>
-        <title>{`Random ${capitalize(category)} Generator`}</title>
+        <title>{`I'm Random: ${capitalize(category)} Generator`}</title>
         <meta
           name="description"
-          content={`Generate a random ${category} instantly. Fun, simple, and useful for everything from passwords to facts.`}
+          content={`Generate a random ${category || "value"} instantly. Fun, simple, and useful for just about anything.`}
         />
       </Helmet>
-     <h1 className="text-3xl font-bold mb-6">Universal Random Generator</h1>
+      <h1 className="text-3xl font-bold mb-6">Universal Random Generator</h1>
+      <p className="text-lg text-gray-600 mb-8 italic text-center">
+        If you can't decide, let the Universe decide for you
+      </p>
 
       {/* Category Select */}
       <div className="mb-4">
@@ -190,14 +252,18 @@ function App({ defaultCategory = "number" }) {
           onChange={(e) => setCategory(e.target.value)}
           className="border rounded px-4 py-2"
         >
-          <option value="number">Number</option>
-          <option value="word">Word</option>
-          <option value="name">Name</option>
-          <option value="password">Password</option>
-          <option value="color">Color</option>
-          <option value="animal">Animal</option>
-          <option value="bible">Bible Verse</option>
-          <option value="fact">Fact</option>
+          <option value="number">🔢 Number</option>
+          <option value="word">💬 Word</option>
+          <option value="name">🧍 Name</option>
+          <option value="password">🔐 Password</option>
+          <option value="color">🎨 Color</option>
+          <option value="animal">🐾 Animal</option>
+          <option value="bible">📖 Bible Verse</option>
+          <option value="fact">💡 Fact</option>
+          <option value="dinner">🍽 Dinner</option>
+          <option value="destination">✈️ Destination</option>
+          <option value="state">🌎 US State</option>
+          <option value="president">🦅 US President</option>
         </select>
       </div>
 
@@ -323,12 +389,40 @@ function App({ defaultCategory = "number" }) {
           <p className="text-sm text-gray-500">Click generate to get a random fact!</p>
         </div>
       )}
+      
+      {/*Dinner */}
+      {category === "dinner" && (
+        <div className="space-y-2 text-center">
+          <p className="text-sm text-gray-500">Click generate to get a dinner idea!</p>
+        </div>
+      )}
+      
+      {/*Destination */}
+      {category === "destination" && (
+        <div className="space-y-2 text-center">
+          <p className="text-sm text-gray-500">Click generate to get a random destination!</p>
+        </div>
+      )}
+      
+      {/*US State */}
+      {category === "state" && (
+        <div className="space-y-2 text-center">
+          <p className="text-sm text-gray-500">Click generate to get a random US state!</p>
+        </div>
+      )}
+
+      {/*US President */}
+      {category === "president" && (
+        <div className="space-y-2 text-center">
+          <p className="text-sm text-gray-500">Click generate to get a random US president!</p>
+        </div>
+      )}
 
 
       {/* Generate Button */}
       <button
         onClick={handleGenerate}
-        className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
+        className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 mt-6"
       >
         Generate
       </button>
@@ -365,6 +459,10 @@ function App({ defaultCategory = "number" }) {
           <a href="/random-animal" className="hover:underline">Animal</a>
           <a href="/random-bible" className="hover:underline">Bible Verse</a>
           <a href="/random-fact" className="hover:underline">Fact</a>
+          <a href="/random-dinner" className="hover:underline">Dinner</a>
+          <a href="/random-destination" className="hover:underline">Destination</a>
+          <a href="/random-state" className="hover:underline">US State</a>
+          <a href="/random-president" className="hover:underline">President</a>
         </div>
       </footer>
     </div>

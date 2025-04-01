@@ -19,6 +19,10 @@ createRoot(document.getElementById('root')).render(
           <Route path="/random-animal" element={<App defaultCategory="animal" />} />
           <Route path="/random-bible" element={<App defaultCategory="bible" />} />
           <Route path="/random-fact" element={<App defaultCategory="fact" />} />
+          <Route path="/random-dinner" element={<App defaultCategory="dinner" />} />
+          <Route path="/random-destination" element={<App defaultCategory="destination" />} />
+          <Route path="/random-state" element={<App defaultCategory="state" />} />
+          <Route path="/random-president" element={<App defaultCategory="president" />} />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
